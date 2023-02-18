@@ -2,6 +2,11 @@ let puzzle;
 let scaling;
 let frame;
 let visited;
+const keypad = [0, 0, 1, 0, 0,
+    0, 2, 3, 4, 0,
+    5, 6, 7, 8, 9, 
+    0,'A','B','C',0,
+    0, 0, 'D',0,0];
 
 function preload() {
     loadStrings("../input/day02.txt", (res) => {
@@ -46,10 +51,11 @@ function drawP2Keypad(frame) {
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             let idx = i + j * 5;
+            if ([0, 1, 3, 4, 5, 9, 15, 19, 20, 21, 23, 24].includes(idx)) continue;
             fill(idx === visited[frame] ? 51 : 200);
             rect(i * scaling, j * scaling, scaling, scaling);
             fill(0);
-            text("?", i * scaling, j * scaling, 80);
+            text(keypad[idx], i * scaling, j * scaling, 80); 
         }
     }
 }
@@ -75,11 +81,6 @@ function part2() {
     let pos = 10;
     let solution = "";
     visited.push(10);
-    const keypad = [0, 0, 1, 0, 0,
-                    0, 2, 3, 4, 0,
-                    5, 6, 7, 8, 9, 
-                    0,'A','B','C',0,
-                    0, 0, 'D',0,0];
     for (let line of puzzle) {
         for (let char of line) {
             if (char === 'U' &&      ![1, 2, 4, 5, 9].includes(keypad[pos])) pos -= 5;
