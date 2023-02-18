@@ -1,7 +1,14 @@
-const instruction = day01.split(", ");
+let instruction;
+
+function preload() {
+    instructions = loadStrings("../input/day01.txt", (res) => {
+        instruction = res.toString().split(", ");
+    });
+}
+
 const scaling = 5;
 let turn = true;
-let thisInstruction = instruction[0];
+let thisInstruction;
 let steps;
 let direction = 0;
 let corner = 0
@@ -11,13 +18,12 @@ let part1, part2;
 
 function setup() {
     createCanvas(1000, 1000);
-    //frameRate(15);
+    //frameRate(1);
     background(51);
-    console.log(instruction);
+    thisInstruction = instruction[0];
 }
 
 function draw() {
-
     translate(920, 250);
     fill(255, 255, 0);
     noStroke();
