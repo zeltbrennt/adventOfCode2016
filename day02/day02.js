@@ -7,6 +7,8 @@ const keypad = [0, 0, 1, 0, 0,
     5, 6, 7, 8, 9, 
     0,'A','B','C',0,
     0, 0, 'D',0,0];
+const intervals = [0];
+let solution = "";
 
 function preload() {
     loadStrings("../input/day02.txt", (res) => {
@@ -21,14 +23,26 @@ function setup() {
     part1();
     part2();
     frame = 0;
-    console.log(visited);
-    //frameRate(1);
+    for (let line of puzzle) {
+        let sum = intervals[intervals.length -1] + line.length;
+        intervals.push(sum);
+    }
+    intervals.shift();
 }
 
 function draw() {
     background(255);
-    if (frame < visited.length / 2) drawP1Keypad(frame);
-    else drawP2Keypad(frame);
+    if (frame < visited.length / 2) {
+        drawP1Keypad(frame);
+        if (intervals.includes(frame)) document.querySelector("#part1").innerText = "Part 1: " + solution.substring(0, intervals.indexOf(frame) + 1);
+    }
+    else {
+        drawP2Keypad(frame);
+        if (intervals.includes(frame - intervals[intervals.length-1])) {
+            let stop = intervals.indexOf(frame - intervals[intervals.length-1]) + puzzle.length;
+            document.querySelector("#part2").innerText = "Part 2: " + solution.substring(puzzle.length, stop + 1) ;
+        }
+    }
     frame++;
 
 }
@@ -63,7 +77,6 @@ function drawP2Keypad(frame) {
 
 function part1() {
     let pos = 5;
-    let solution = "";
     for (let line of puzzle) {
         for (let char of line) {
             if (char === 'U' && pos > 2) pos -= 3;
@@ -79,7 +92,6 @@ function part1() {
 
 function part2() {
     let pos = 10;
-    let solution = "";
     visited.push(10);
     for (let line of puzzle) {
         for (let char of line) {
@@ -91,5 +103,5 @@ function part2() {
         }
         solution += keypad[pos];
     }
-    console.log(solution);
+    console.log(solution.substring(puzzle.length));
 }
