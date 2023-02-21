@@ -54,7 +54,7 @@ function drawP1Keypad(frame) {
         for (let j = 0; j < 3; j++) {
             let idx = i + j * 3;
             fill(idx === visited[frame] ? 51 : 200);
-            rect(i * scaling, j * scaling, scaling, scaling);
+            newRect(i * scaling, j * scaling, scaling, scaling);
             fill(0);
             text(idx + 1, i * scaling, j * scaling, 80);
         }
@@ -67,7 +67,7 @@ function drawP2Keypad(frame) {
             let idx = i + j * 5;
             if ([0, 1, 3, 4, 5, 9, 15, 19, 20, 21, 23, 24].includes(idx)) continue;
             fill(idx === visited[frame] ? 51 : 200);
-            rect(i * scaling, j * scaling, scaling, scaling);
+            newRect(i * scaling, j * scaling, scaling, scaling);
             fill(0);
             text(keypad[idx], i * scaling, j * scaling, 80); 
         }
