@@ -29,7 +29,7 @@ function draw() {
     circle(c/2, 0, b);
     const x = (Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * c);
     if (Math.pow(a, 2) > Math.pow(x, 2)) {
-        const y = sqrt(Math.pow(a, 2) - Math.pow(x, 2));
+        const y = Math.sqrt(Math.pow(a, 2) - Math.pow(x, 2));
         stroke(55);
         line(c/2, 0, x/2, y/2);
         line(0, 0, x/2, y/2);
