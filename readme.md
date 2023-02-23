@@ -41,3 +41,12 @@ In this repo, I will solve Advent-Of-Code problems from 2016 in JavaScript. If p
 - problem: manipulate 2D-Array
 - insight: solution *is* the visualization
 - visuals: pixel display
+
+## Day 09: Explosives in Cyberspace
+- problem: string manipulation
+- insight: don't decompress string, keep track of factors instead
+
+## Day 10: Balance Bots
+- problem: directed graph and scrambled input
+- insight: it's basically bubble sort
+- visuals: animated graph showing paths of values
