@@ -14,14 +14,14 @@ let row, col;
 function setup() {
     createCanvas(880, 440);
     //noLoop();
-    frameRate(30);
+    frameRate(3);
     //console.log(grid);
     row = 0;
     col = 0;
 }
 
 function draw() {
-    background(220);
+    background(200);
     textAlign(CENTER);
 
     for (let y = 0; y < values.length; y++) {
@@ -45,8 +45,13 @@ function draw() {
             text(grid[y][x][0], x * 40 + 4, y * 20 + 5, 12);
             fill(grid[y][x][1] < grid[y][x][0] ? "#4CAF50" : grid[y][x][1] > grid[y][x][0] ? "#F44336" : "#515151");
             text(grid[y][x][1], x * 40 + 24, y * 20 + 5, 12);
+            noFill();
+            stroke(100, 100);
+            rect(x * 40, y * 20, 40, 20);
         }
     }
+
+    noStroke();
     for (let x = 0; x < 21; x++) {
         let value = x < 20 ? Math.min(...grid[19][x]) : Math.max(...grid[19][+x - 1]);
         fill(map(value, 2, 73, 100, 250));
@@ -54,8 +59,6 @@ function draw() {
         fill(51);
         text(value, x * 40 + 12, 405, 12);
     }
-
-
     if (col == grid.length - 1) noLoop();
     [row, col] = step(row, col);
 }
