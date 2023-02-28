@@ -2,10 +2,17 @@ const md5 = require("md5");
 const salt = "abc";
 
 let number = 0;
+const hashes = [];
+
+for (let i = 0; i < 25000; i++) {
+    hashes.push(stretch(salt + i, 0));
+    if (i % 1000 == 0) console.log(i / 25000);
+}
+console.log("done precomputing");
 
 for (let i = 0; i < 64; i++) {
     number = getKey(number) + 1;
-    console.log(number- 1);
+    console.log(i, number - 1);
 }
 
 function getKey(idx) {
@@ -18,18 +25,26 @@ function getKey(idx) {
 }
 
 function findCandidate(idx) {
-    while (!md5(salt + idx).match(/(.)\1\1/)) idx++;
-    let char = md5(salt + idx).match(/(.)\1\1/)[1];
-    return [idx , char];
+    while (!hashes[idx].match(/(.)\1{2}/)) idx++;
+    let char = hashes[idx].match(/(.)\1{2}/)[1];
+    return [idx, char];
 }
 
 
 function isKey(char, idx) {
-    const re = new RegExp("(" + char + ")\\1\\1\\1\\1");
+    const re = new RegExp("(" + char + ")\\1{4}");
     for (let i = 1; i <= 1000; i++) {
-        if (md5(salt + (idx + i)).match(re)) {
+        if (hashes[idx + i].match(re)) {
             return true;
         }
     }
     return false;
+}
+
+function stretch(str, times) {
+    let hash = md5(str);
+    for (let i = 0; i < times; i++) {
+        hash = md5(hash);
+    }
+    return hash;
 }
