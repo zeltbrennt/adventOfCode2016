@@ -14,7 +14,7 @@ let row, col;
 function setup() {
     createCanvas(880, 440);
     //noLoop();
-    frameRate(3);
+    frameRate(5);
     //console.log(grid);
     row = 0;
     col = 0;
