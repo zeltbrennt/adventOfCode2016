@@ -50,3 +50,49 @@ In this repo, I will solve Advent-Of-Code problems from 2016 in JavaScript. If p
 - problem: directed graph and scrambled input
 - insight: it's basically bubble sort
 - visuals: animated graph showing paths of values
+
+## Day 11: Radioisotope Thermoelectric Generators
+- problem: graph traversal, shortest path
+- insight: aggressive pruning is key, solution might not be generally correct
+- visuals: WIP
+
+## Day 12: Leonardos Monorail
+- problem: parse asembly code
+- insight: simple is good enough
+- visuals: none
+
+## Day 13: A Maze of Twisty Little Cubicles
+- problem: maze navigation, shortest path
+- insight: generative function instead of knowledge of whole maze
+- visuals: pathfinder
+
+## Day 14: One-Time Pad
+- problem: hashing and salting
+- insight: precomputing is key
+- visuals: none
+
+## Day 15: Timing is Everything
+- problem: predetermine a certain state
+- insight: analytic answer might be possible, but brut force works fast enough
+- visuals: the last few seconds, before the solution
+
+## Day 16: Dragon Checksum
+- problem: recursive generation
+- insight: analytic answer might be possible, but brut force works fast enough
+- visuals: none
+
+## Day 17: Two Steps Forward
+- problem: navigating a changing maze
+- insight: BFS and DFS, no circles possible 
+- visuals: WIP
+
+## Day 18: Like a Rogue
+- problem: enforce simple rules
+- insight: again, brute force works
+- visuals: in console
+
+## Day 19: An Elephant Named Joseph
+- problem: determine final state, not trivial
+- insight: brute force not working, but Josephus-Problem (thank you, Numberphile!)
+- visuals: none
+
