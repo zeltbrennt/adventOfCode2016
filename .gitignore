@@ -1,2 +1,6 @@
 /input
 /libraries
+/node_modules
+package*.json
+*.viz
+/.fleet
