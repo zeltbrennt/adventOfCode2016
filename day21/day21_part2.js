@@ -8,7 +8,7 @@ const puzzle = [
     "rotate based on position of letter b",
     "rotate based on position of letter d"
 ];
-const password = "abcde".split("");
+const password = "decab".split("");
 
 Array.prototype.swapPosition = function(x, y) {
     [this[y], this[x]] = [this[x], this[y]];
@@ -20,14 +20,30 @@ Array.prototype.swapLetter = function(x, y) {
 
 Array.prototype.rotate = function(dir, offset) {
     for (let i = 0; i < offset; i++) {
-        if (dir === "left") this.push(this.shift());
+        if (dir === "right") this.push(this.shift());
         else this.unshift(this.pop());
     }
 }
 
 Array.prototype.rotatePosition = function(x) {
     x = this.indexOf(x);
-    this.rotate("right", x + (x >= 4 ? 2 : 1))
+    switch(x) {
+        case 0: this.rotate("right", 1);
+        break;
+        case 1: this.rotate("right", 1);
+        break;
+        case 2: this.rotate("left", 2);
+        break;
+        case 3: this.rotate("right", 2);
+        break;
+        case 4: this.rotate("left", 1);
+        break;
+        case 5: this.rotate("right", 3);
+        break;
+        case 7: this.rotate("left", 4);
+        break;
+
+    }
 }
 
 Array.prototype.reversePosition = function(x, y) {
@@ -38,12 +54,13 @@ Array.prototype.reversePosition = function(x, y) {
     }
 }
 
-Array.prototype.move = function(x, y) {
+Array.prototype.move = function(y, x) {
     let temp = this[x];
     this.splice(x, 1);
     this.splice(y, 0, temp);
 }
-
+puzzle.reverse()
+console.log(password)
 for (let line of puzzle) {
     if (line.match("swap position")) {
         let index = line.match(/\d/g)
