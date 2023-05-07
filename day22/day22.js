@@ -14,6 +14,8 @@ input = [
 ]
 
 class Node {
+    static maxX = 0;
+    static maxY = 0;
     constructor(x, y, size, used, avail, fill) {
         this.x = Number(x);
         this.y = Number(y);
@@ -21,16 +23,18 @@ class Node {
         this.avail = Number(avail);
         this.used = Number(used);
         this.fill = Number(fill)
+        Node.maxX = Math.max(Node.maxX, x);
+        Node.maxY = Math.max(Node.maxY, y);
     }
 
     isViablePair(other) {
-        return this.used != 0 && !(this.x == other.x && this.y == other.y) && this.used <= other.avail
+        return this.used != 0 && !(this.x == other.x && this.y == other.y) && this.used <= other.avail;
     }
 }
 
 nodes = []
 for (let s of input.slice(2)) {
-    nodes.push(new Node(...s.match(/\d+/g)))
+    nodes.push(new Node(...s.match(/\d+/g)));
 }
 pairs = 0
 for (let a of nodes) {
@@ -39,3 +43,22 @@ for (let a of nodes) {
     }
 }
 console.log(pairs + ' / ' + nodes.length)
+
+
+grid = new Array(Node.maxY + 1);
+for (let y = 0; y <= Node.maxY; y++) {
+    grid[y] = new Array(Node.maxY);
+}
+
+for (let node of nodes) {
+    grid[node.y][node.x] = node;
+}
+
+// solve visualy
+console.log(grid.map(row => row.map(element => {
+    if (element.x == 0 && element.y == 0) return '>';
+    if (element.x == Node.maxX && element.y == 0) return 'G';
+    if (element.used > 100) return '#'
+    if (element.used == 0) return '_'
+    return '.'}).join(' ')).join('\n'));
+
