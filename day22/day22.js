@@ -47,7 +47,7 @@ console.log(pairs + ' / ' + nodes.length)
 
 grid = new Array(Node.maxY + 1);
 for (let y = 0; y <= Node.maxY; y++) {
-    grid[y] = new Array(Node.maxY);
+    grid[y] = new Array(Node.maxX + 1);
 }
 
 for (let node of nodes) {
