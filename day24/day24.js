@@ -1,5 +1,5 @@
 const puzzle = [
-  
+
 ]
 
 const HEIGHT = puzzle.length;
@@ -47,12 +47,8 @@ const getDistance = (origin, target) => {
     return NaN;
 }
 
-console.log(puzzle);
-console.log(stations);
-
 for (let s in stations) {
     for (let d in stations) {
-        console.log(d);
         stations[s][d] = getDistance(stations[s], stations[d]);
     }
 }
@@ -62,11 +58,12 @@ const shortestRoute = (visited, path, current) => {
     for (let neighbor in stations) {
         if (!visited.includes(neighbor)) shortestRoute(visited, path + stations[current][neighbor], neighbor);
     }
-    if (visited.length == Object.keys(stations).length && path < shortestPath) {
-        console.log('[' + visited + ']' + ':' + path);
-        shortestPath = path;
+    if (visited.length == Object.keys(stations).length) {
+        part1 = Math.min(part1, path);
+        part2 = Math.min(part2, path + stations[current]['0']);
     }
 }
-let shortestPath = Number.MAX_SAFE_INTEGER;
+let part2 = Number.MAX_SAFE_INTEGER;
+let part1 = Number.MAX_SAFE_INTEGER;
 shortestRoute('', 0, '0');
-console.log(shortestPath);
+console.log(`Part 1: ${part1}\nPart 2: ${part2}`);
