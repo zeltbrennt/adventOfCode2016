@@ -1,35 +1,10 @@
 const puzzle = [
-    "cpy a b",
-    "dec b",
-    "cpy a d",
-    "cpy 0 a",
-    "cpy b c",
-    "inc a",
-    "dec c",
-    "jnz c -2",
-    "dec d",
-    "jnz d -5",
-    "dec b",
-    "cpy b c",
-    "cpy c d",
-    "dec d",
-    "inc c",
-    "jnz d -2",
-    "tgl c",
-    "cpy -16 c",
-    "jnz 1 c",
-    "cpy 95 c",
-    "jnz 73 d",
-    "inc a",
-    "inc d",
-    "jnz d -2",
-    "inc c",
-    "jnz c -5"
-    
+
 ];
 
 const solve = (part) => {
     const reg  = {"a": 7, "b": 0, "c": 0, "d": 0};
+    if (part == 2) reg.a = 12;
     for (let idx = 0; idx < puzzle.length; idx++) {
         const inst = puzzle[idx].split(" ");
         if (inst[0] === "inc") reg[inst[1]]++;
@@ -52,8 +27,11 @@ const solve = (part) => {
             else if (temp.length == 3 && temp[0] != "jnz") temp[0] = "jnz";
             puzzle[idx + jump] = temp.join(" ");
         }
+        else if (inst[0] === "mult") {
+            reg[inst[1]] = reg[inst[2]] * reg[inst[3]];
+        }
     }
     console.log(`Part ${part}: ${reg.a}`);
 }
 
-solve(1);
+solve(2);
